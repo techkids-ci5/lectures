@@ -1,3 +1,6 @@
+import controllers.Colliable;
+import controllers.CollsionPool;
+import controllers.EnemyManager;
 import controllers.PlaneController;
 
 import utils.Utils;
@@ -10,14 +13,14 @@ import java.awt.image.BufferedImage;
 /**
  * Created by qhuydtvt on 7/24/2016.
  */
-public class GameWindow extends Frame implements Runnable {
+public class GameWindow extends Frame implements Runnable{
     Image background;
 
     BufferedImage bufferedImage;
     Graphics bufferImageGraphic;
     Thread thread;
 
-    PlaneController planeController1;
+//    PlaneController planeController1;
 
     public GameWindow() {
         System.out.println("Game window constructor");
@@ -65,9 +68,8 @@ public class GameWindow extends Frame implements Runnable {
 
         background =  Utils.loadImage("resources/background.png");
 
-        planeController1 = PlaneController.getPlaneController1();
 
-        this.addKeyListener(planeController1);
+        this.addKeyListener(PlaneController.planeController);
 
 //        this.addMouseMotionListener(new MouseMotionListener() {
 //            @Override
@@ -94,7 +96,8 @@ public class GameWindow extends Frame implements Runnable {
     public void update(Graphics g) {
         bufferImageGraphic.drawImage(background, 0, 0, null);
 
-        planeController1.draw(bufferImageGraphic);
+        PlaneController.planeController.draw(bufferImageGraphic);
+        EnemyManager.instance.draw(bufferImageGraphic);
 
         g.drawImage(bufferedImage, 0, 0, null);
 
@@ -105,7 +108,9 @@ public class GameWindow extends Frame implements Runnable {
         while (true) {
             try {
                 Thread.sleep(17);
-                planeController1.run();
+                PlaneController.planeController.run();
+                EnemyManager.instance.run();
+                CollsionPool.instance.run();
                 repaint();
             } catch (InterruptedException e) {
                 e.printStackTrace();
