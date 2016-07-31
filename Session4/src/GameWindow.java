@@ -107,15 +107,14 @@ public class GameWindow extends Frame implements Runnable{
     public void run() {
         while (true) {
             try {
-                Thread.sleep(17);
                 PlaneController.planeController.run();
                 EnemyManager.instance.run();
                 CollsionPool.instance.run();
+                Thread.sleep(17);
                 repaint();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

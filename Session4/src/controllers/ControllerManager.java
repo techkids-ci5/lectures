@@ -21,21 +21,30 @@ public class ControllerManager implements BaseController {
 
     @Override
     public void draw(Graphics g) {
-        for(BaseController controller : this.singleControllerVector) {
-            controller.draw(g);
+        synchronized (this.singleControllerVector) {
+            Iterator<SingleController> singleControllerIterator =
+                    this.singleControllerVector.iterator();
+            while(singleControllerIterator.hasNext()) {
+                SingleController singleController = singleControllerIterator.next();
+                if(singleController.getGameObject().isAlive()) {
+                    singleController.draw(g);
+                }
+            }
         }
     }
 
     @Override
     public void run() {
-        Iterator<SingleController> singleControllerIterator =
-                this.singleControllerVector.iterator();
-        while(singleControllerIterator.hasNext()) {
-            SingleController singleController = singleControllerIterator.next();
-            if(!singleController.getGameObject().isAlive()) {
-                singleControllerIterator.remove();
-            } else {
-                singleController.run();
+        synchronized (this.singleControllerVector) {
+            Iterator<SingleController> singleControllerIterator =
+                    this.singleControllerVector.iterator();
+            while(singleControllerIterator.hasNext()) {
+                SingleController singleController = singleControllerIterator.next();
+                if(!singleController.getGameObject().isAlive()) {
+                    singleControllerIterator.remove();
+                } else {
+                    singleController.run();
+                }
             }
         }
     }
