@@ -14,8 +14,6 @@ public class EnemyControllerManager extends ControllerManager {
 
     private EnemyControllerManager() {
         super();
-
-
     }
 
     @Override
@@ -31,22 +29,20 @@ public class EnemyControllerManager extends ControllerManager {
             count = 0;
             /* TODO: Generate plane controller 2 */
             for (int i = 0; i < 5; i++) {
-                EnemyController2 enemyController = new EnemyController2(
-                        new Enemy(enX, enY, 2),
-                        new ImageDrawer("resources/enemy_plane_white_3.png")
-                );
+                EnemyController enemyController =
+                        EnemyController.create(enX,
+                                enY, EnemyPlaneType.WHITE);
                 enX += 100;
                 this.add(enemyController);
             }
         }
         else if (count == RESPAWN_TYPE1) {
             for (int i = 0; i < 5; i++) {
-                EnemyController1 enemyController1 = new EnemyController1(
-                        new Enemy(enX, enY),
-                        new ImageDrawer("resources/plane1.png")
-                );
+                EnemyController enemyController =
+                        EnemyController.create(enX,
+                                enY, EnemyPlaneType.YELLOW);
                 enX += 100;
-                this.add(enemyController1);
+                this.add(enemyController);
             }
         }
     }
