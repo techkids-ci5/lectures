@@ -27,7 +27,7 @@ public class BulletController extends SingleController implements Colliable {
 
     @Override
     public void onCollide(Colliable colliable) {
-        if (colliable instanceof EnemyController) {
+        if (colliable instanceof EnemyController1) {
             Bullet bullet = (Bullet)gameObject;
             ((GameObjectWithHP)colliable.getGameObject()).decreaseHP(bullet.getDamage());
             this.getGameObject().destroy();

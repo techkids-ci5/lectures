@@ -1,5 +1,8 @@
-package controllers;
+package controllers.Enemy;
 
+import controllers.Colliable;
+import controllers.PlaneController;
+import controllers.SingleController;
 import models.GameObject;
 import views.GameDrawer;
 

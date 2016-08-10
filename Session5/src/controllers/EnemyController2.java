@@ -2,6 +2,7 @@ package controllers;
 
 import models.Enemy;
 import models.EnemyBullet;
+import models.GameObjectWithHP;
 import views.GameDrawer;
 import views.ImageDrawer;
 
@@ -10,7 +11,7 @@ import java.awt.*;
 /**
  * Created by qhuydtvt on 8/3/2016.
  */
-public class EnemyController2 extends EnemyController implements Colliable {
+public class EnemyController2 extends EnemyController1 implements Colliable {
 
     private final static int MOVEMENT_SPEED = 1;
     private final static int SHOT_SPEED = 150;
@@ -20,9 +21,11 @@ public class EnemyController2 extends EnemyController implements Colliable {
     public EnemyController2(Enemy gameObject, GameDrawer gameDrawer) {
         super(gameObject, gameDrawer);
 
+
         this.gameVector.dx = MOVEMENT_SPEED;
         this.gameVector.dy = MOVEMENT_SPEED;
     }
+
     @Override
     public void run() {
         super.run();
@@ -44,6 +47,7 @@ public class EnemyController2 extends EnemyController implements Colliable {
 
                 EnemyBulletControllerManager.instance.add(enemyBulletController);
             }
+
         }
 
         if(this.gameObject.getX() >= 600 || this.gameObject.getX() <= 0) {

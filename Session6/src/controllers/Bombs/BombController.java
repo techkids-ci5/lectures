@@ -5,7 +5,6 @@ import controllers.CollsionPool;
 import controllers.PlaneController;
 import controllers.SingleController;
 import models.Bomb;
-import models.Plane;
 import utils.Utils;
 import views.GameDrawer;
 import views.ImageDrawer;
@@ -30,7 +29,7 @@ public class BombController extends SingleController implements Colliable {
     public void onCollide(Colliable colliable) {
         if(colliable instanceof PlaneController) {
 
-            BombNotificationCenter.instance
+            NotificationCenter.instance
                     .onBomExpode(gameObject.getX(), gameObject.getY());
             Utils.playSound("resources/explosion.wav", false);
             gameObject.destroy();

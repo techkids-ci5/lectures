@@ -1,4 +1,6 @@
-package controllers;
+package controllers.Enemy;
+
+import controllers.ControllerManager;
 
 /**
  * Created by qhuydtvt on 8/3/2016.
