@@ -24,6 +24,7 @@ public class PlaneController extends SingleController
 
     private ControllerManager bulletManager;
     private GameInput gameInput;
+    private boolean cheat = false;
 
     private GameSceneListener gameSceneListener;
 
@@ -94,6 +95,9 @@ public class PlaneController extends SingleController
             case KeyEvent.VK_S: /*S stands for Setting :)*/
                 gameSceneListener.changeGameScene(new GameOverScene(), false);
                 break;
+            case KeyEvent.VK_C:
+                cheat = true;
+                break;
 
         }
     }
@@ -103,10 +107,12 @@ public class PlaneController extends SingleController
     }
 
     public void decreaseHP(int amount) {
-        ((GameObjectWithHP)gameObject).decreaseHP(amount);
+        if(!cheat) {
+            ((GameObjectWithHP)gameObject).decreaseHP(amount);
         /*TODO: If HP <= 0 => Change gamescene to Higscore or GameOver */
-        if (((GameObjectWithHP) gameObject).getHp() <= 0) {
-            gameSceneListener.changeGameScene(new GameOverScene(), false);
+            if (((GameObjectWithHP) gameObject).getHp() <= 0) {
+                gameSceneListener.changeGameScene(new GameOverScene(), false);
+            }
         }
     }
 
@@ -148,7 +154,7 @@ public class PlaneController extends SingleController
         super.run();
         bulletManager.run();
     }
-    
+
     public final static PlaneController instance = new PlaneController(
             new Plane(250, 600),
             new ImageDrawer("resources/plane3.png")
